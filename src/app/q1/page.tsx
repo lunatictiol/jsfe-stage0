@@ -14,11 +14,14 @@ import { useState } from "react";
 export default function NumbersPage() {
   const [number, setNumber] = useState<number>(0);
   const [inputArray, setInputArray] = useState<string>("");
+  const [parsedArray, setParsedArray] = useState<number[]>([]);
 
   const handleArrayInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputArray(e.target.value);
     try {
       const parsedValue = JSON.parse(e.target.value);
+      console.log("parsed", parsedValue)
+      setParsedArray(parsedValue)
       if (
         Array.isArray(parsedValue) &&
         parsedValue.length > 0 &&
@@ -35,8 +38,20 @@ export default function NumbersPage() {
   };
 
   const handleFindClick = () => {
-    const randomNumber = Math.floor(Math.random() * 101); // Generates a random integer between 0 and 100
-    setNumber(randomNumber);
+    const size = parsedArray.length
+    const ActualSize = parsedArray[size - 1]
+    console.log("actual size", ActualSize)
+    const expectedSum = (ActualSize * (ActualSize + 1)) / 2
+    var actualSum: number = 0
+
+    console.log("state array", parsedArray)
+    for (let i = 0; i < size; i++) {
+      let current = parsedArray[i]
+      actualSum += current
+    }
+
+    const neededeValue = expectedSum - actualSum
+    setNumber(neededeValue);
   };
 
   return (
