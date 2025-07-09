@@ -51,8 +51,17 @@ export default function Q4Page() {
   const [inStockProducts, setInStockProducts] = useState<Product[]>([]);
 
   const generateReport = () => {
-    // todo generate
+    const names = products.map((product) => product.name);
+    const saleTotal = products
+      .filter((product) => product.onSale)
+      .reduce((sum, product) => sum + product.price, 0);
+    const inStock = products.filter((product) => product.inStock);
+
+    setProductNames(names);
+    setTotalSalePrice(saleTotal);
+    setInStockProducts(inStock);
   };
+
 
   useEffect(() => {
     // TODO: Implement the data fetching and processing logic here

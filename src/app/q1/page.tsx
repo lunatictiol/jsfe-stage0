@@ -22,15 +22,6 @@ export default function NumbersPage() {
       const parsedValue = JSON.parse(e.target.value);
       console.log("parsed", parsedValue)
       setParsedArray(parsedValue)
-      if (
-        Array.isArray(parsedValue) &&
-        parsedValue.length > 0 &&
-        typeof parsedValue[0] === "number"
-      ) {
-        setNumber(parsedValue[0]);
-      } else {
-        setNumber(0);
-      }
     } catch (error) {
       console.error("Invalid JSON input:", error);
       setNumber(0);
